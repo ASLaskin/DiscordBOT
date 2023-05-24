@@ -1,14 +1,12 @@
-require('dotenv').config();
+const Discord = require("discord.js");
 const mySecret = process.env['DISCORD_BOT_ID']
-
-const axios = require('axios');
 const { Client, GatewayIntentBits } = require('discord.js');
 const client = new Client({ intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages, GatewayIntentBits.MessageContent] });
+const keepAlive = require("./server")
 
 
-
-client.on('ready', () => {
-    console.log('bot is ready');
+client.on("ready", () => {
+  console.log(`Logged in as ${client.user.tag}!`)
 })
 
 client.on('messageCreate', async (message) => {
@@ -27,5 +25,8 @@ client.on('messageCreate', async (message) => {
     }
 })
 
-client.login(mySecret);
+keepAlive();
+client.login(mySecret)
+msg.channel.send("hey")
+
 
